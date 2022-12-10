@@ -6,10 +6,10 @@ const JOB_DEFINITION = "takahara-fargate-batch-task";
 
 export const handler = async () => {
   const params = new SubmitJobCommand({
-    jobName: new Date().toISOString(),
+    jobName: String(Math.floor( new Date().getTime() / 1000 )),
     jobQueue: JOB_QUEUE,
     jobDefinition: JOB_DEFINITION,
     parameters: { word: "AWS Bacth job!" },
   });
   return batchClient.send(params);
-}
+};
